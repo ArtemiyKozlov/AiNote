@@ -5,9 +5,11 @@ import * as errorHandler from "errorhandler"
 import * as mongoose from "mongoose";
 import {indexController} from "./controllers/index";
 import * as nconf from "nconf";
+import * as path from "path";
 
 //TODO: add env specific configuration
-nconf.argv().env().file({file: "./configuration/config.json"});
+let pathToConfigurationFile = path.resolve(__dirname, './configuration/config.json');
+nconf.argv().env().file(pathToConfigurationFile);
 
 let app = express();
 
