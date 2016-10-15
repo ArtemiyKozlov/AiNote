@@ -1,11 +1,19 @@
 {
   "name": "AiNote",
   "version": "0.0.1",
+  "scripts": {
+    "start": "node bin/server/app.js"
+  },
   "dependencies": {
     "body-parser": "^1.14.1",
     "config.json": "0.0.4",
+    "errorhandler": "^1.4.3",
     "express": "^4.13.3",
     "method-override": "^2.3.6",
-    "mongoose": "^4.6.3"
+    "mongoose": "^4.6.3",
+    "nconf": "^0.8.4"
+  },
+  "devDependencies": {
+    "typescript": "^2.0.3"
   }
 }

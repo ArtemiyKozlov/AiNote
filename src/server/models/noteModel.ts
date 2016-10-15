@@ -6,12 +6,11 @@ let noteSchema = new mongoose.Schema({
     body: String
 });
 
-interface INoteModel extends mongoose.Document {
+export interface INoteModel extends mongoose.Document {
     header: string;
     body: string;
 }
 
 const mongoDocumentName = "Note";
-let NoteModel = mongoose.model<INoteModel>(mongoDocumentName, noteSchema);
-
-export = NoteModel;
+export let NoteModel;
+NoteModel = mongoose.model<INoteModel>(mongoDocumentName, noteSchema);
