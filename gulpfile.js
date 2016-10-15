@@ -1,13 +1,18 @@
 var gulp = require("gulp");
 var ts = require("gulp-typescript");
+var sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('scripts', function () {
-    gulp.src(["src/**/*.ts", "./typings/**/*.d.ts"])
+    var tsResult = gulp.src(["src/**/*.ts", "./typings/**/*.d.ts"])
+        .pipe(sourcemaps.init())
         .pipe(ts({
             noImplicitAny: false,
             module: "commonjs"
-        }))
-        .pipe(gulp.dest("bin/"));
+        }));
+
+    return tsResult.js
+        .pipe(sourcemaps.write('./sourceMaps'))
+        .pipe(gulp.dest('bin/'));
 });
 
 var confFilesToMove = [
@@ -15,7 +20,7 @@ var confFilesToMove = [
 ];
 
 gulp.task('move', function() {
-    gulp.src(confFilesToMove, { base: 'src/' })
+    return gulp.src(confFilesToMove, { base: 'src/' })
         .pipe(gulp.dest('bin/'));
 });
 
