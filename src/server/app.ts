@@ -9,8 +9,6 @@ import * as nconf from "nconf";
 //TODO: add env specific configuration
 nconf.argv().env().file({file: "./configuration/config.json"});
 
-let config = nconf.get();
-
 let app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -27,13 +25,14 @@ let onExit = function() {
 };
 process.on('SIGINT', onExit).on('SIGTERM', onExit);
 
-let mongoOptions = config.mongo.options;
-let mongoConnectionString = config.mongo.connectionString;
+let mongoConf = nconf.get('mongo');
+let mongoOptions = mongoConf.options;
+let mongoConnectionString = mongoConf.connectionString;
 mongoose.connect(mongoConnectionString, mongoOptions, function(err) {
     console.log("Sever initialization failed " , err.message);
 });
 
-let port = config.port;
+let port = nconf.get('port');
 app.listen(port, function(){
     console.log("Server is listening port %d in %s mode", port, app.settings.env);
 });
