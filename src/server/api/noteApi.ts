@@ -7,6 +7,13 @@ noteRepository = new MongoNoteRepository();
 
 export let noteApi = express.Router();
 
+noteApi.get('/', function(req, res) {
+    noteRepository.getAll(function(err, note) {
+        if(err) {/*TODO: handle error*/}
+        res.json(500, note);
+    });
+});
+
 noteApi.get('/:id', function(req, res) {
     let noteId = req.params.id;
     noteRepository.get(noteId, function(err, note) {
