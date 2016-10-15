@@ -1,0 +1,19 @@
+{
+  "port": 3000,
+  "mongo": {
+    "connectionString": "mongodb://localhost:28017"
+    "options": {
+      "server": {
+        "socketOptions": {
+          "keepAlive": 1
+        }
+      },
+      "replset": {
+        "socketOptions": {
+          "keepAlive": 1
+        }
+      }
+    }
+
+  }
+}
