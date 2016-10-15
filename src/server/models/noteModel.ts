@@ -12,4 +12,5 @@ export interface INoteModel extends mongoose.Document {
 }
 
 const mongoDocumentName = "Note";
-export let NoteModel = mongoose.model<INoteModel>(mongoDocumentName, noteSchema);
+export let NoteModel;
+NoteModel = mongoose.model<INoteModel>(mongoDocumentName, noteSchema);

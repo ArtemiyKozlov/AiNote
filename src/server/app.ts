@@ -2,26 +2,21 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as methodOverride from "method-override"
 import * as errorHandler from "errorhandler"
-import * as config from "config.json";
 import * as mongoose from "mongoose";
 import {indexController} from "./controllers/index";
+import * as nconf from "nconf";
 
-let config = config('./server/config.json');
+//TODO: add env specific configuration
+nconf.argv().env().file({file: "./configuration/config.json"});
+
+let config = nconf.get();
+
 let app = express();
 
-app.configure(function(){
-    app.use(bodyParser.urlencoded({ extended: true }));
-    app.use(bodyParser.json());
-    app.use(methodOverride());
-});
-
-app.configure('development', function(){
-    app.use(errorHandler({ dumpExceptions: true, showStack: true }));
-});
-
-app.configure('production', function(){
-    app.use(errorHandler());
-});
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(methodOverride());
+app.use(errorHandler({log: true}));
 
 app.use(indexController);
 

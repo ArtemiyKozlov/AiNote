@@ -1,5 +1,5 @@
 import * as express from "express";
-import * as noteApi from "../api/noteApi";
+import {noteApi} from "../api/noteApi";
 
 export let indexController = express.Router();
 
