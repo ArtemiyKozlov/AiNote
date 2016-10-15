@@ -4,6 +4,7 @@ import * as methodOverride from "method-override"
 import * as errorHandler from "errorhandler"
 import * as config from "config.json";
 import * as mongoose from "mongoose";
+import {indexController} from "./controllers/index";
 
 let config = config('./server/config.json');
 let app = express();
@@ -21,6 +22,8 @@ app.configure('development', function(){
 app.configure('production', function(){
     app.use(errorHandler());
 });
+
+app.use(indexController);
 
 let onExit = function() {
     mongoose.connection.close(function () {
